@@ -1,5 +1,5 @@
 from MySQL.MySQLDB import mySQL
-import mysql.connector
+
 class Clientes:
     id = 0
     nome = ""
