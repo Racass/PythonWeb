@@ -2,9 +2,9 @@ import mysql.connector
 
 def getMySQLConn() -> mysql.connector.connection.MySQLConnection:
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="R@fael36",
-        database="escola"
+        host="192.168.1.41",
+        user="rafael",
+        passwd="rafael36",
+        database="PythonTests"
     )
     return mydb
