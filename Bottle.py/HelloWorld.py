@@ -1,5 +1,5 @@
-from bottle import Bottle, run, static_file, get, post, request
-
+from bottle import Bottle, run, static_file, get, post, request, template
+from MySQL.Clientes import Clientes
 import os
 import pip #To check if mysql is installed
 
@@ -20,15 +20,16 @@ def hello():
     return 'Hello World!'
 @app.route('/')
 def index():
-    return '<h3>index</h3>'
+    return template('./HTML/entryPage')
 @app.get('/teste')
 def teste():
-    return static_file('cadastro.html', root="./HTML/")
-@app.get('/form')
-def form():
-    return static_file('cadastro.html', root="./HTML/")
+    return template('./HTML/cadastro')
 
-@app.post('/form')
+@app.get('/cadastroCli')
+def form():
+    return template('./HTML/cadastro')
+
+@app.post('/cadastroCli')
 def do_form():
     nome = request.forms.get("nome")
     fone = request.forms.get("fone")
@@ -39,8 +40,9 @@ def do_form():
         cli.fone = fone
         cli.email = email
         cli.Sync()
-        return "nome: " + nome + " fone: " + fone + " email: " + email
+        return template('./HTML/inserction_success', nome=cli.nome, fone=cli.fone, email=cli.email)
     else:
-        return "MySQL não importado." + "nome: " + nome + " fone: " + fone + " email: " + email
+        return template('./HTML/DBNotFound')
+        #return "MySQL não importado." + "nome: " + nome + " fone: " + fone + " email: " + email
 
 run(app, host='localhost', port=8080)
