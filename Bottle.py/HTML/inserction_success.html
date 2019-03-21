@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cadastro de Clientes</title>
+         <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+    </head>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-3"></div>
+            <div class="col col-lg-6">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-lg-1"></div>
+                        <div class="col col-lg-3">
+                            <h3>Inserção realizada!</h3>
+                        </div>
+                        <div class="col col-lg-2"></div>
+                    </div>
+                </div>
+                <table class="table">
+                <thead>
+                        <tr class="bg-success">
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Fone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{nome}}</td>
+                            <td>{{email}}</td>
+                            <td>{{fone}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col-lg-2"></div>
+        </div>  
+    </body>
+</html>
