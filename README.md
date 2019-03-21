@@ -7,8 +7,8 @@ Atualmente possui um app em Bottle.py e um projeto de Django ( não usável )
 
 Para usar o Bottle.py website, uma página de inserção em um banco MySQL utilizando a web como UI, você precisará executar o seguinte comando no MySQL:
 
-> create database PythonTestes  
-> create Table (  
+> CREATE DATABASE PythonTestes  
+> CREATE TABLE Clientes(  
 >                 ID INT NOT NULL AUTO_INCREMENT,  
 >                 nome VARCHAR(100) NOT NULL,  
 >                 fone VARCHAR(100) NOT NULL,  
