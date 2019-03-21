@@ -1,5 +1,4 @@
 import mysql.connector
-from MySQL.myConns import getMySQLConn
 from MySQL.database import DataBase
 
 class mySQL(DataBase):
@@ -16,3 +15,11 @@ class mySQL(DataBase):
         return myCursor.fetchall()
     def commit(self):
         self.myDB.commit()
+    def getMySQLConn() -> mysql.connector.connection.MySQLConnection:
+        mydb = mysql.connector.connect(
+            host="192.168.1.41",
+            user="rafael",
+            passwd="rafael36",
+            database="PythonTests"
+        )
+        return mydb
