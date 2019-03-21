@@ -1,8 +1,11 @@
 import mysql.connector
-from MySQL.database import DataBase
+try:
+    from MySQL.database import DataBase
+except ImportError:
+    from database import DataBase
 
 class mySQL(DataBase):
-    myDB = getMySQLConn()
+        
     def execModQuery(self, query: str) -> int:
         myCursor = self.myDB.cursor()
         myCursor.execute(query)
@@ -15,7 +18,7 @@ class mySQL(DataBase):
         return myCursor.fetchall()
     def commit(self):
         self.myDB.commit()
-    def getMySQLConn() -> mysql.connector.connection.MySQLConnection:
+    def getDBConn(self):
         mydb = mysql.connector.connect(
             host="192.168.1.41",
             user="rafael",

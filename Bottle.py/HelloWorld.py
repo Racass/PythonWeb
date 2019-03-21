@@ -1,5 +1,6 @@
 from bottle import Bottle, run, static_file, get, post, request, template
 from MySQL.Clientes import Clientes
+from MySQL.Clientes import getTopClients
 import os
 import pip #To check if mysql is installed
 
@@ -24,6 +25,9 @@ def index():
 @app.get('/teste')
 def teste():
     return template('./HTML/cadastro')
+@app.get('/getClis')
+def getClis():
+    return template('./HTML/consultaCli', Clis=getTopClients(10))
 
 @app.get('/cadastroCli')
 def form():

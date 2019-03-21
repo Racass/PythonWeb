@@ -1,15 +1,20 @@
-from MySQL.MySQLDB import mySQL
+try:
+    from MySQL.MySQLDB import mySQL
+except ImportError:
+    from MySQLDB import mySQL
+
+
+db = mySQL(True)
+
 
 class Clientes:
     id = 0
     nome = ""
     email = ""
     fone = ""
-    db = mySQL(True)
-    
     def getClientes(self):
         sqlGet = f"SELECT id, nome, email, fone FROM Clientes WHERE id = {self.id}"
-        oRS = self.db.execReadQuery(sqlGet)
+        oRS = db.execReadQuery(sqlGet)
         for result in oRS:
             self.id = result[0]
             self.nome = result[1]
@@ -24,23 +29,33 @@ class Clientes:
 
     def delete(self):
         sqlDelete = f"DELETE FROM Clientes WHERE id = {self.id}"
-        return self.db.execModQuery(sqlDelete)
+        return db.execModQuery(sqlDelete)
     def Sync(self):
         sqlGet = f"SELECT COUNT(id) FROM Clientes WHERE id = {self.id}"
-        oResultSet = self.db.execReadQuery(sqlGet)
+        oResultSet = db.execReadQuery(sqlGet)
         for x in oResultSet:
             if(x[0] > 0):
                 update = f"UPDATE Clientes SET nome = '{self.nome}', email = '{self.email}', fone = '{self.fone}' WHERE id = {self.id}"
-                self.db.execModQuery(update)
+                db.execModQuery(update)
             else:
                 insert = f"INSERT INTO Clientes (nome, email, fone) VALUES ('{self.nome}', '{self.email}', '{self.fone}')"
-                self.db.execModQuery(insert)
+                db.execModQuery(insert)
         self.getClientes()
     def getNext(self):
         sqlGet = "SELECT COALESCE(Max(id), 0) + 1 FROM Clientes"
-        oRS = self.db.execReadQuery(sqlGet)
+        oRS = db.execReadQuery(sqlGet)
         self.id = oRS[0][0]
         self.nome = ""
         self.fone = ""
         self.email = ""
         return oRS[0][0]
+
+def getTopClients(top: int) -> tuple:
+    Clis = []
+    sqlGet = f'SELECT id FROM Clientes LIMIT {top}'
+    oRS = db.execReadQuery(sqlGet)
+    for rslt in oRS:
+        cli = Clientes(rslt[0])
+        cli.getClientes()
+        Clis.append(cli)
+    return Clis
